@@ -95,4 +95,4 @@ tests/                pytest suite for graph, routing, gate, guardrails
 
 ## License
 
-TBD (MIT suggested).
+MIT. See [`LICENSE`](LICENSE).
