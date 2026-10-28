@@ -1,0 +1,20 @@
+{
+  "scenarios": {
+    "kickoff": {
+      "title": "Plan a client kickoff next week",
+      "request": "Plan a kickoff with Lumen & Lark Robotics next week: brief me, pick a time, draft the agenda and send the invite."
+    },
+    "incident": {
+      "title": "Triage a production incident",
+      "request": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it."
+    },
+    "offsite": {
+      "title": "Organize a team offsite",
+      "request": "Organize a one-day offsite for the 8-person platform team next month under $3k."
+    }
+  },
+  "modes": {
+    "simulated": true
+  },
+  "note": "All companies, people and data are fictional."
+}

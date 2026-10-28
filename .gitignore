@@ -7,6 +7,6 @@ node_modules/
 !.env.example
 *.db
 *.sqlite
-data/
+/data/
 logs/
 .DS_Store

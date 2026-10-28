@@ -96,3 +96,9 @@ tests/                pytest suite for graph, routing, gate, guardrails
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
+
+## Cloudflare Pages (portfolio demo)
+
+Static demo root: `site/` (recorded kickoff replay; no FastAPI). Sample JSON: `demo/data/` (mirrored at `site/data/`).
+
+Suggested Pages project: **multi-agent-assistant** · Production branch `main` · Framework none · Root directory `site`.

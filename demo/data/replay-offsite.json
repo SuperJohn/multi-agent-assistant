@@ -1,0 +1,68 @@
+{
+  "scenario": "offsite",
+  "roster": [
+    {
+      "name": "Planner",
+      "role": "Breaks the request into a task graph and writes the final brief",
+      "color": "#6366f1"
+    },
+    {
+      "name": "Researcher",
+      "role": "Searches the (fictional) knowledge base and CRM notes",
+      "color": "#0ea5e9"
+    },
+    {
+      "name": "Scheduler",
+      "role": "Finds open slots across participants' calendars",
+      "color": "#14b8a6"
+    },
+    {
+      "name": "Scribe",
+      "role": "Drafts agendas, notes and outbound messages",
+      "color": "#f59e0b"
+    },
+    {
+      "name": "Guardian",
+      "role": "Security & policy review: PII, secrets, external-sharing rules",
+      "color": "#ef4444"
+    },
+    {
+      "name": "Dispatcher",
+      "role": "Performs outbound actions, only after human approval",
+      "color": "#22c55e"
+    },
+    {
+      "name": "Orchestrator",
+      "role": "Routes tasks and messages",
+      "color": "#5eead4"
+    },
+    {
+      "name": "Human",
+      "role": "Approves gated outbound actions",
+      "color": "#e5e9f2"
+    }
+  ],
+  "events": [
+    {
+      "t": 0.0,
+      "type": "request",
+      "title": "Organize a team offsite",
+      "text": "Organize a one-day offsite for the 8-person platform team next month under $3k.",
+      "mode": "simulated"
+    },
+    {
+      "t": 0.2,
+      "type": "message",
+      "sender": "Human",
+      "to": "Orchestrator",
+      "kind": "request",
+      "content": "Organize a one-day offsite for the 8-person platform team next month under $3k."
+    },
+    {
+      "t": 0.5,
+      "type": "run",
+      "state": "idle"
+    }
+  ],
+  "note": "Full animated replay ships for kickoff; pick kickoff for the portfolio demo."
+}

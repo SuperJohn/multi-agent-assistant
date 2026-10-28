@@ -1,0 +1,861 @@
+{
+  "scenario": "kickoff",
+  "roster": [
+    {
+      "name": "Planner",
+      "role": "Breaks the request into a task graph and writes the final brief",
+      "color": "#6366f1"
+    },
+    {
+      "name": "Researcher",
+      "role": "Searches the (fictional) knowledge base and CRM notes",
+      "color": "#0ea5e9"
+    },
+    {
+      "name": "Scheduler",
+      "role": "Finds open slots across participants' calendars",
+      "color": "#14b8a6"
+    },
+    {
+      "name": "Scribe",
+      "role": "Drafts agendas, notes and outbound messages",
+      "color": "#f59e0b"
+    },
+    {
+      "name": "Guardian",
+      "role": "Security & policy review: PII, secrets, external-sharing rules",
+      "color": "#ef4444"
+    },
+    {
+      "name": "Dispatcher",
+      "role": "Performs outbound actions, only after human approval",
+      "color": "#22c55e"
+    },
+    {
+      "name": "Orchestrator",
+      "role": "Routes tasks and messages",
+      "color": "#5eead4"
+    },
+    {
+      "name": "Human",
+      "role": "Approves gated outbound actions",
+      "color": "#e5e9f2"
+    }
+  ],
+  "events": [
+    {
+      "t": 0.0,
+      "type": "request",
+      "title": "Plan a client kickoff next week",
+      "text": "Plan a kickoff with Lumen & Lark Robotics next week: brief me, pick a time, draft the agenda and send the invite.",
+      "mode": "simulated"
+    },
+    {
+      "t": 0.1,
+      "type": "message",
+      "sender": "Human",
+      "to": "Orchestrator",
+      "kind": "request",
+      "content": "Plan a kickoff with Lumen & Lark Robotics next week: brief me, pick a time, draft the agenda and send the invite."
+    },
+    {
+      "t": 0.2,
+      "type": "agent",
+      "agent": {
+        "name": "Planner",
+        "role": "Breaks the request into a task graph and writes the final brief",
+        "color": "#6366f1",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.25,
+      "type": "agent",
+      "agent": {
+        "name": "Researcher",
+        "role": "Searches the (fictional) knowledge base and CRM notes",
+        "color": "#0ea5e9",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.30000000000000004,
+      "type": "agent",
+      "agent": {
+        "name": "Scheduler",
+        "role": "Finds open slots across participants' calendars",
+        "color": "#14b8a6",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.35000000000000003,
+      "type": "agent",
+      "agent": {
+        "name": "Scribe",
+        "role": "Drafts agendas, notes and outbound messages",
+        "color": "#f59e0b",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.4,
+      "type": "agent",
+      "agent": {
+        "name": "Guardian",
+        "role": "Security & policy review: PII, secrets, external-sharing rules",
+        "color": "#ef4444",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.45,
+      "type": "agent",
+      "agent": {
+        "name": "Dispatcher",
+        "role": "Performs outbound actions, only after human approval",
+        "color": "#22c55e",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 0.5,
+      "type": "agent",
+      "agent": {
+        "name": "Orchestrator",
+        "role": "Routes tasks and messages",
+        "color": "#5eead4",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 1.0,
+      "type": "task",
+      "task": {
+        "id": "plan",
+        "title": "Decompose request into a task graph",
+        "skill": "",
+        "deps": [],
+        "requires_approval": false,
+        "status": "queued",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.15,
+      "type": "task",
+      "task": {
+        "id": "research",
+        "title": "Research Lumen & Lark Robotics account notes",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.2999999999999998,
+      "type": "task",
+      "task": {
+        "id": "slots",
+        "title": "Find a 60-min slot next week for 4 attendees",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.4499999999999997,
+      "type": "task",
+      "task": {
+        "id": "agenda",
+        "title": "Draft kickoff agenda",
+        "skill": "",
+        "deps": [
+          "research"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.5,
+      "type": "agent",
+      "agent": {
+        "name": "Planner",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "plan"
+      }
+    },
+    {
+      "t": 1.5,
+      "type": "task",
+      "task": {
+        "id": "plan",
+        "title": "Decompose request into a task graph",
+        "skill": "",
+        "deps": [],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Planner",
+        "output": ""
+      }
+    },
+    {
+      "t": 1.5999999999999996,
+      "type": "task",
+      "task": {
+        "id": "invite",
+        "title": "Draft calendar invite + email",
+        "skill": "",
+        "deps": [
+          "agenda",
+          "slots"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.6,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Planner",
+      "kind": "assign",
+      "content": "Assigned: Decompose request into a task graph"
+    },
+    {
+      "t": 1.7499999999999996,
+      "type": "task",
+      "task": {
+        "id": "review",
+        "title": "Security & policy review of outbound invite",
+        "skill": "",
+        "deps": [
+          "invite"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 1.8999999999999995,
+      "type": "task",
+      "task": {
+        "id": "send",
+        "title": "Send invite to external attendees",
+        "skill": "",
+        "deps": [
+          "review"
+        ],
+        "requires_approval": true,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 2.0499999999999994,
+      "type": "task",
+      "task": {
+        "id": "brief",
+        "title": "Write the final brief for the user",
+        "skill": "",
+        "deps": [
+          "send"
+        ],
+        "requires_approval": false,
+        "status": "blocked",
+        "agent": null,
+        "output": ""
+      }
+    },
+    {
+      "t": 2.2,
+      "type": "task",
+      "task": {
+        "id": "plan",
+        "title": "Decompose request into a task graph",
+        "skill": "",
+        "deps": [],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Planner",
+        "output": "Plan: research account -> find slots (parallel) -> draft agenda & invite -> security review -> human approval -> send."
+      }
+    },
+    {
+      "t": 2.2,
+      "type": "agent",
+      "agent": {
+        "name": "Planner",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 2.2,
+      "type": "message",
+      "sender": "Planner",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Plan: research account -> find slots (parallel) -> draft agenda & invite -> security review -> human approval -> send."
+    },
+    {
+      "t": 2.3,
+      "type": "agent",
+      "agent": {
+        "name": "Researcher",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "research"
+      }
+    },
+    {
+      "t": 2.3,
+      "type": "task",
+      "task": {
+        "id": "research",
+        "title": "Research Lumen & Lark Robotics account notes",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Researcher",
+        "output": ""
+      }
+    },
+    {
+      "t": 2.3,
+      "type": "agent",
+      "agent": {
+        "name": "Scheduler",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "slots"
+      }
+    },
+    {
+      "t": 2.3,
+      "type": "task",
+      "task": {
+        "id": "slots",
+        "title": "Find a 60-min slot next week for 4 attendees",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Scheduler",
+        "output": ""
+      }
+    },
+    {
+      "t": 2.4,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Researcher",
+      "kind": "assign",
+      "content": "Assigned: Research Lumen & Lark Robotics account notes"
+    },
+    {
+      "t": 2.4,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Scheduler",
+      "kind": "assign",
+      "content": "Assigned: Find a 60-min slot next week for 4 attendees"
+    },
+    {
+      "t": 3.2,
+      "type": "task",
+      "task": {
+        "id": "slots",
+        "title": "Find a 60-min slot next week for 4 attendees",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Scheduler",
+        "output": "Free for all 4 attendees: Tue 10:00-11:00, Wed 14:00-15:00, Thu 09:30-10:30. Recommend Wed 14:00 (no adjacent conflicts)."
+      }
+    },
+    {
+      "t": 3.2,
+      "type": "agent",
+      "agent": {
+        "name": "Scheduler",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 3.2,
+      "type": "message",
+      "sender": "Scheduler",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Free for all 4 attendees: Tue 10:00-11:00, Wed 14:00-15:00, Thu 09:30-10:30. Recommend Wed 14:00 (no adjacent conflicts)."
+    },
+    {
+      "t": 3.5,
+      "type": "task",
+      "task": {
+        "id": "research",
+        "title": "Research Lumen & Lark Robotics account notes",
+        "skill": "",
+        "deps": [
+          "plan"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Researcher",
+        "output": "Lumen & Lark (fictional): 40-person warehouse-robotics startup. Champion: Priya Quasar (VP Ops). Goal: cut pick-time 20%. Open risk: data-retention questions from their legal team."
+      }
+    },
+    {
+      "t": 3.5,
+      "type": "agent",
+      "agent": {
+        "name": "Researcher",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 3.5,
+      "type": "message",
+      "sender": "Researcher",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Lumen & Lark (fictional): 40-person warehouse-robotics startup. Champion: Priya Quasar (VP Ops). Goal: cut pick-time 20%. Open risk: data-retention questions from their legal team."
+    },
+    {
+      "t": 3.6,
+      "type": "agent",
+      "agent": {
+        "name": "Scribe",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "agenda"
+      }
+    },
+    {
+      "t": 3.6,
+      "type": "task",
+      "task": {
+        "id": "agenda",
+        "title": "Draft kickoff agenda",
+        "skill": "",
+        "deps": [
+          "research"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Scribe",
+        "output": ""
+      }
+    },
+    {
+      "t": 3.7,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Scribe",
+      "kind": "assign",
+      "content": "Assigned: Draft kickoff agenda"
+    },
+    {
+      "t": 4.5,
+      "type": "task",
+      "task": {
+        "id": "agenda",
+        "title": "Draft kickoff agenda",
+        "skill": "",
+        "deps": [
+          "research"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Scribe",
+        "output": "Agenda: 1) Intros 2) Goals: -20% pick-time 3) Data-retention Q&A 4) Pilot scope & timeline 5) Next steps."
+      }
+    },
+    {
+      "t": 4.5,
+      "type": "agent",
+      "agent": {
+        "name": "Scribe",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 4.5,
+      "type": "message",
+      "sender": "Scribe",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Agenda: 1) Intros 2) Goals: -20% pick-time 3) Data-retention Q&A 4) Pilot scope & timeline 5) Next steps."
+    },
+    {
+      "t": 4.6,
+      "type": "agent",
+      "agent": {
+        "name": "Scribe",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "invite"
+      }
+    },
+    {
+      "t": 4.6,
+      "type": "task",
+      "task": {
+        "id": "invite",
+        "title": "Draft calendar invite + email",
+        "skill": "",
+        "deps": [
+          "agenda",
+          "slots"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Scribe",
+        "output": ""
+      }
+    },
+    {
+      "t": 4.699999999999999,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Scribe",
+      "kind": "assign",
+      "content": "Assigned: Draft calendar invite + email"
+    },
+    {
+      "t": 5.5,
+      "type": "task",
+      "task": {
+        "id": "invite",
+        "title": "Draft calendar invite + email",
+        "skill": "",
+        "deps": [
+          "agenda",
+          "slots"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Scribe",
+        "output": "Subject: Kickoff, Lumen & Lark x Acme Demo Co, Wed 14:00. Hi Priya, looking forward to kicking off. Agenda attached. Dial-in: 555-014-2231 [internal]."
+      }
+    },
+    {
+      "t": 5.5,
+      "type": "agent",
+      "agent": {
+        "name": "Scribe",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 5.5,
+      "type": "message",
+      "sender": "Scribe",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Subject: Kickoff, Lumen & Lark x Acme Demo Co, Wed 14:00. Hi Priya, looking forward to kicking off. Agenda attached. Dial-in: 555-014-2231 [internal]."
+    },
+    {
+      "t": 5.6,
+      "type": "agent",
+      "agent": {
+        "name": "Guardian",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "review"
+      }
+    },
+    {
+      "t": 5.6,
+      "type": "task",
+      "task": {
+        "id": "review",
+        "title": "Security & policy review of outbound invite",
+        "skill": "",
+        "deps": [
+          "invite"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Guardian",
+        "output": ""
+      }
+    },
+    {
+      "t": 5.699999999999999,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Guardian",
+      "kind": "assign",
+      "content": "Assigned: Security & policy review of outbound invite"
+    },
+    {
+      "t": 6.4,
+      "type": "task",
+      "task": {
+        "id": "review",
+        "title": "Security & policy review of outbound invite",
+        "skill": "",
+        "deps": [
+          "invite"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Guardian",
+        "output": "Reviewed invite: recipients are on the approved external domain; no attachments with customer data.\nGuardrail scan flagged: phone number, internal-only marker -> redacted in outbound copy."
+      }
+    },
+    {
+      "t": 6.4,
+      "type": "agent",
+      "agent": {
+        "name": "Guardian",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 6.4,
+      "type": "message",
+      "sender": "Guardian",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Reviewed invite: recipients are on the approved external domain; no attachments with customer data.\nGuardrail scan flagged: phone number, internal-only marker -> redacted in outbou"
+    },
+    {
+      "t": 6.5,
+      "type": "agent",
+      "agent": {
+        "name": "Dispatcher",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "send"
+      }
+    },
+    {
+      "t": 6.5,
+      "type": "task",
+      "task": {
+        "id": "send",
+        "title": "Send invite to external attendees",
+        "skill": "",
+        "deps": [
+          "review"
+        ],
+        "requires_approval": true,
+        "status": "running",
+        "agent": "Dispatcher",
+        "output": ""
+      }
+    },
+    {
+      "t": 6.6,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Dispatcher",
+      "kind": "assign",
+      "content": "Assigned: Send invite to external attendees"
+    },
+    {
+      "t": 7.15,
+      "type": "task",
+      "task": {
+        "id": "send",
+        "title": "Send invite to external attendees",
+        "skill": "",
+        "deps": [
+          "review"
+        ],
+        "requires_approval": true,
+        "status": "awaiting_approval",
+        "agent": "Dispatcher",
+        "output": ""
+      }
+    },
+    {
+      "t": 7.3500000000000005,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Human",
+      "kind": "approval",
+      "content": "Approve outbound: Send invite to external attendees?"
+    },
+    {
+      "t": 7.8,
+      "type": "task",
+      "task": {
+        "id": "send",
+        "title": "Send invite to external attendees",
+        "skill": "",
+        "deps": [
+          "review"
+        ],
+        "requires_approval": true,
+        "status": "done",
+        "agent": "Dispatcher",
+        "output": "Invite sent to 3 external attendees for Wed 14:00. Dial-in: [REDACTED]."
+      }
+    },
+    {
+      "t": 7.8,
+      "type": "agent",
+      "agent": {
+        "name": "Dispatcher",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 7.8,
+      "type": "message",
+      "sender": "Dispatcher",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Invite sent to 3 external attendees for Wed 14:00. Dial-in: [REDACTED]."
+    },
+    {
+      "t": 7.9,
+      "type": "agent",
+      "agent": {
+        "name": "Planner",
+        "role": "",
+        "color": "#888",
+        "status": "busy",
+        "busy_with": "brief"
+      }
+    },
+    {
+      "t": 7.9,
+      "type": "task",
+      "task": {
+        "id": "brief",
+        "title": "Write the final brief for the user",
+        "skill": "",
+        "deps": [
+          "send"
+        ],
+        "requires_approval": false,
+        "status": "running",
+        "agent": "Planner",
+        "output": ""
+      }
+    },
+    {
+      "t": 7.95,
+      "type": "message",
+      "sender": "Human",
+      "to": "Orchestrator",
+      "kind": "approve",
+      "content": "Approved (static demo auto-approve)."
+    },
+    {
+      "t": 8.0,
+      "type": "message",
+      "sender": "Orchestrator",
+      "to": "Planner",
+      "kind": "assign",
+      "content": "Assigned: Write the final brief for the user"
+    },
+    {
+      "t": 8.5,
+      "type": "task",
+      "task": {
+        "id": "brief",
+        "title": "Write the final brief for the user",
+        "skill": "summarize",
+        "deps": [
+          "send"
+        ],
+        "requires_approval": false,
+        "status": "done",
+        "agent": "Planner",
+        "output": "Done: kickoff booked Wed 14:00, agenda shared, legal's data-retention question is item 3. Guardian redacted an internal dial-in before sending."
+      }
+    },
+    {
+      "t": 8.5,
+      "type": "agent",
+      "agent": {
+        "name": "Planner",
+        "role": "",
+        "color": "#888",
+        "status": "idle",
+        "busy_with": null
+      }
+    },
+    {
+      "t": 8.5,
+      "type": "message",
+      "sender": "Planner",
+      "to": "Orchestrator",
+      "kind": "result",
+      "content": "Done: kickoff booked Wed 14:00, agenda shared, legal's data-retention question is item 3. Guardian redacted an internal dial-in before sending."
+    },
+    {
+      "t": 8.7,
+      "type": "run",
+      "state": "done"
+    }
+  ]
+}
