@@ -1,0 +1,41 @@
+{
+ "app": "multi-agent-assistant",
+ "synthetic": true,
+ "generator": "demo/generate_data.py",
+ "seed": 42,
+ "replays": {
+  "kickoff": {
+   "events": 69,
+   "tasks": 8,
+   "seconds": 8.7
+  },
+  "incident": {
+   "events": 83,
+   "tasks": 8,
+   "seconds": 9.47
+  },
+  "offsite": {
+   "events": 75,
+   "tasks": 7,
+   "seconds": 8.13
+  },
+  "vendor": {
+   "events": 85,
+   "tasks": 9,
+   "seconds": 10.24
+  },
+  "hiring": {
+   "events": 83,
+   "tasks": 8,
+   "seconds": 9.69
+  }
+ },
+ "files": [
+  {"name": "replay-incident.json", "bytes": 16989, "sha256": "88cf0fb3eaf61227a3fd8af6bba824b952e56de126857f80c49421b5c6b91797"},
+  {"name": "replay-offsite.json", "bytes": 15162, "sha256": "c1bc1ab51579e0392393576323653b8acb605c5dcc0435b7e5bcc4f607a1a894"},
+  {"name": "replay-vendor.json", "bytes": 18375, "sha256": "021d3273bb232667855d035a1f74c3e26b31d4ae7992cee022cb2f52372c5bb7"},
+  {"name": "replay-hiring.json", "bytes": 18171, "sha256": "fb1fb064f432ed937e73bd2ddc33c7aa091c170dd2e248a8e6773025b394586c"},
+  {"name": "scenarios.json", "bytes": 1170, "sha256": "8ec59586247707a2567932b7cc7713d08fa7ca862e04ba1cb3a1ed27f203d823"}
+ ],
+ "unchanged": ["replay-kickoff.json (recorded; also served from site/data/)"]
+}

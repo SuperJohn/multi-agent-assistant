@@ -1,68 +1,92 @@
 {
-  "scenario": "offsite",
-  "roster": [
-    {
-      "name": "Planner",
-      "role": "Breaks the request into a task graph and writes the final brief",
-      "color": "#6366f1"
-    },
-    {
-      "name": "Researcher",
-      "role": "Searches the (fictional) knowledge base and CRM notes",
-      "color": "#0ea5e9"
-    },
-    {
-      "name": "Scheduler",
-      "role": "Finds open slots across participants' calendars",
-      "color": "#14b8a6"
-    },
-    {
-      "name": "Scribe",
-      "role": "Drafts agendas, notes and outbound messages",
-      "color": "#f59e0b"
-    },
-    {
-      "name": "Guardian",
-      "role": "Security & policy review: PII, secrets, external-sharing rules",
-      "color": "#ef4444"
-    },
-    {
-      "name": "Dispatcher",
-      "role": "Performs outbound actions, only after human approval",
-      "color": "#22c55e"
-    },
-    {
-      "name": "Orchestrator",
-      "role": "Routes tasks and messages",
-      "color": "#5eead4"
-    },
-    {
-      "name": "Human",
-      "role": "Approves gated outbound actions",
-      "color": "#e5e9f2"
-    }
-  ],
-  "events": [
-    {
-      "t": 0.0,
-      "type": "request",
-      "title": "Organize a team offsite",
-      "text": "Organize a one-day offsite for the 8-person platform team next month under $3k.",
-      "mode": "simulated"
-    },
-    {
-      "t": 0.2,
-      "type": "message",
-      "sender": "Human",
-      "to": "Orchestrator",
-      "kind": "request",
-      "content": "Organize a one-day offsite for the 8-person platform team next month under $3k."
-    },
-    {
-      "t": 0.5,
-      "type": "run",
-      "state": "idle"
-    }
-  ],
-  "note": "Full animated replay ships for kickoff; pick kickoff for the portfolio demo."
+ "scenario": "offsite",
+ "title": "Organize a team offsite",
+ "synthetic": true,
+ "roster": [
+  {"name": "Planner", "role": "Breaks the request into a task graph and writes the final brief", "color": "#6366f1"},
+  {"name": "Researcher", "role": "Searches the (fictional) knowledge base and CRM notes", "color": "#0ea5e9"},
+  {"name": "Scheduler", "role": "Finds open slots across participants' calendars", "color": "#14b8a6"},
+  {"name": "Scribe", "role": "Drafts agendas, notes and outbound messages", "color": "#f59e0b"},
+  {"name": "Guardian", "role": "Security & policy review: PII, secrets, external-sharing rules", "color": "#ef4444"},
+  {"name": "Dispatcher", "role": "Performs outbound actions, only after human approval", "color": "#22c55e"},
+  {"name": "Orchestrator", "role": "Routes tasks and messages", "color": "#5eead4"},
+  {"name": "Human", "role": "Approves gated outbound actions", "color": "#e5e9f2"}
+ ],
+ "events": [
+  {"t": 0.0, "type": "request", "title": "Organize a team offsite", "text": "Organize a one-day offsite for the 8-person platform team next month under $3k.", "mode": "simulated"},
+  {"t": 0.1, "type": "message", "sender": "Human", "to": "Orchestrator", "kind": "request", "content": "Organize a one-day offsite for the 8-person platform team next month under $3k."},
+  {"t": 0.2, "type": "agent", "agent": {"name": "Planner", "role": "Breaks the request into a task graph and writes the final brief", "color": "#6366f1", "status": "idle", "busy_with": null}},
+  {"t": 0.25, "type": "agent", "agent": {"name": "Researcher", "role": "Searches the (fictional) knowledge base and CRM notes", "color": "#0ea5e9", "status": "idle", "busy_with": null}},
+  {"t": 0.3, "type": "agent", "agent": {"name": "Scheduler", "role": "Finds open slots across participants' calendars", "color": "#14b8a6", "status": "idle", "busy_with": null}},
+  {"t": 0.35, "type": "agent", "agent": {"name": "Scribe", "role": "Drafts agendas, notes and outbound messages", "color": "#f59e0b", "status": "idle", "busy_with": null}},
+  {"t": 0.4, "type": "agent", "agent": {"name": "Guardian", "role": "Security & policy review: PII, secrets, external-sharing rules", "color": "#ef4444", "status": "idle", "busy_with": null}},
+  {"t": 0.45, "type": "agent", "agent": {"name": "Dispatcher", "role": "Performs outbound actions, only after human approval", "color": "#22c55e", "status": "idle", "busy_with": null}},
+  {"t": 0.5, "type": "agent", "agent": {"name": "Orchestrator", "role": "Routes tasks and messages", "color": "#5eead4", "status": "idle", "busy_with": null}},
+  {"t": 1.0, "type": "task", "task": {"id": "plan", "title": "Decompose offsite planning", "skill": "plan", "deps": [], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 1.15, "type": "task", "task": {"id": "venues", "title": "Research venues (fictional directory)", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.3, "type": "task", "task": {"id": "dates", "title": "Find a date that works for 8 people", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.45, "type": "task", "task": {"id": "budget", "title": "Draft budget + agenda", "skill": "draft", "deps": ["venues", "dates"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.5, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "busy", "busy_with": "plan"}},
+  {"t": 1.5, "type": "task", "task": {"id": "plan", "title": "Decompose offsite planning", "skill": "plan", "deps": [], "requires_approval": false, "status": "running", "agent": "Planner", "output": ""}},
+  {"t": 1.6, "type": "task", "task": {"id": "review", "title": "Policy review: spend & vendor rules", "skill": "review", "deps": ["budget"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.6, "type": "message", "sender": "Orchestrator", "to": "Planner", "kind": "assign", "content": "Assigned: Decompose offsite planning"},
+  {"t": 1.75, "type": "task", "task": {"id": "book", "title": "Book venue and send calendar holds", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.9, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["book"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 2.19, "type": "task", "task": {"id": "plan", "title": "Decompose offsite planning", "skill": "plan", "deps": [], "requires_approval": false, "status": "done", "agent": "Planner", "output": "Plan: venues + dates in parallel -> budget & agenda -> review -> approval -> book."}},
+  {"t": 2.19, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 2.19, "type": "message", "sender": "Planner", "to": "Orchestrator", "kind": "result", "content": "Plan: venues + dates in parallel -> budget & agenda -> review -> approval -> book."},
+  {"t": 2.24, "type": "task", "task": {"id": "venues", "title": "Research venues (fictional directory)", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 2.24, "type": "task", "task": {"id": "dates", "title": "Find a date that works for 8 people", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 2.29, "type": "agent", "agent": {"name": "Researcher", "role": "", "color": "#888", "status": "busy", "busy_with": "venues"}},
+  {"t": 2.29, "type": "task", "task": {"id": "venues", "title": "Research venues (fictional directory)", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "running", "agent": "Researcher", "output": ""}},
+  {"t": 2.29, "type": "agent", "agent": {"name": "Scheduler", "role": "", "color": "#888", "status": "busy", "busy_with": "dates"}},
+  {"t": 2.29, "type": "task", "task": {"id": "dates", "title": "Find a date that works for 8 people", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "running", "agent": "Scheduler", "output": ""}},
+  {"t": 2.39, "type": "message", "sender": "Orchestrator", "to": "Researcher", "kind": "assign", "content": "Assigned: Research venues (fictional directory)"},
+  {"t": 2.39, "type": "message", "sender": "Orchestrator", "to": "Scheduler", "kind": "assign", "content": "Assigned: Find a date that works for 8 people"},
+  {"t": 2.44, "type": "message", "sender": "Planner", "to": "Researcher", "kind": "handoff", "content": "Handoff from 'Decompose offsite planning'"},
+  {"t": 2.44, "type": "message", "sender": "Planner", "to": "Scheduler", "kind": "handoff", "content": "Handoff from 'Decompose offsite planning'"},
+  {"t": 3.1, "type": "task", "task": {"id": "dates", "title": "Find a date that works for 8 people", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "done", "agent": "Scheduler", "output": "Best dates: Fri 14th (8/8 free) or Thu 20th (7/8)."}},
+  {"t": 3.1, "type": "agent", "agent": {"name": "Scheduler", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 3.1, "type": "message", "sender": "Scheduler", "to": "Orchestrator", "kind": "result", "content": "Best dates: Fri 14th (8/8 free) or Thu 20th (7/8)."},
+  {"t": 3.27, "type": "task", "task": {"id": "venues", "title": "Research venues (fictional directory)", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "done", "agent": "Researcher", "output": "Shortlist: The Copper Kettle Loft ($1,400/day), Harborlight Studio ($1,950/day), Greenwick Barn ($1,100/day, 40 min away)."}},
+  {"t": 3.27, "type": "agent", "agent": {"name": "Researcher", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 3.27, "type": "message", "sender": "Researcher", "to": "Orchestrator", "kind": "result", "content": "Shortlist: The Copper Kettle Loft ($1,400/day), Harborlight Studio ($1,950/day), Greenwick Barn ($1,100/day, 40 min away)."},
+  {"t": 3.32, "type": "task", "task": {"id": "budget", "title": "Draft budget + agenda", "skill": "draft", "deps": ["venues", "dates"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 3.37, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "busy", "busy_with": "budget"}},
+  {"t": 3.37, "type": "task", "task": {"id": "budget", "title": "Draft budget + agenda", "skill": "draft", "deps": ["venues", "dates"], "requires_approval": false, "status": "running", "agent": "Scribe", "output": ""}},
+  {"t": 3.47, "type": "message", "sender": "Orchestrator", "to": "Scribe", "kind": "assign", "content": "Assigned: Draft budget + agenda"},
+  {"t": 3.52, "type": "message", "sender": "Researcher", "to": "Scribe", "kind": "handoff", "content": "Handoff from 'Research venues (fictional directory)'"},
+  {"t": 3.52, "type": "message", "sender": "Scheduler", "to": "Scribe", "kind": "handoff", "content": "Handoff from 'Find a date that works for 8 people'"},
+  {"t": 4.29, "type": "task", "task": {"id": "budget", "title": "Draft budget + agenda", "skill": "draft", "deps": ["venues", "dates"], "requires_approval": false, "status": "done", "agent": "Scribe", "output": "Copper Kettle Loft, Fri 14th: venue $1,400 + catering $960 + activity $400 = $2,760 (under $3k). Agenda: roadmap AM, hack-sprint PM, dinner."}},
+  {"t": 4.29, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 4.29, "type": "message", "sender": "Scribe", "to": "Orchestrator", "kind": "result", "content": "Copper Kettle Loft, Fri 14th: venue $1,400 + catering $960 + activity $400 = $2,760 (under $3k). Agenda: roadmap AM, hack-sprint PM, dinner."},
+  {"t": 4.34, "type": "task", "task": {"id": "review", "title": "Policy review: spend & vendor rules", "skill": "review", "deps": ["budget"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 4.39, "type": "agent", "agent": {"name": "Guardian", "role": "", "color": "#888", "status": "busy", "busy_with": "review"}},
+  {"t": 4.39, "type": "task", "task": {"id": "review", "title": "Policy review: spend & vendor rules", "skill": "review", "deps": ["budget"], "requires_approval": false, "status": "running", "agent": "Guardian", "output": ""}},
+  {"t": 4.49, "type": "message", "sender": "Orchestrator", "to": "Guardian", "kind": "assign", "content": "Assigned: Policy review: spend & vendor rules"},
+  {"t": 4.54, "type": "message", "sender": "Scribe", "to": "Guardian", "kind": "handoff", "content": "Handoff from 'Draft budget + agenda'"},
+  {"t": 5.04, "type": "task", "task": {"id": "review", "title": "Policy review: spend & vendor rules", "skill": "review", "deps": ["budget"], "requires_approval": false, "status": "done", "agent": "Guardian", "output": "Within $3k cap; vendor not on blocklist; deposit is refundable.\nGuardrail scan: clean."}},
+  {"t": 5.04, "type": "agent", "agent": {"name": "Guardian", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 5.04, "type": "message", "sender": "Guardian", "to": "Orchestrator", "kind": "result", "content": "Within $3k cap; vendor not on blocklist; deposit is refundable.\nGuardrail scan: clean."},
+  {"t": 5.09, "type": "task", "task": {"id": "book", "title": "Book venue and send calendar holds", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "queued", "agent": null, "output": ""}},
+  {"t": 5.14, "type": "agent", "agent": {"name": "Dispatcher", "role": "", "color": "#888", "status": "busy", "busy_with": "book"}},
+  {"t": 5.14, "type": "task", "task": {"id": "book", "title": "Book venue and send calendar holds", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "running", "agent": "Dispatcher", "output": ""}},
+  {"t": 5.24, "type": "message", "sender": "Orchestrator", "to": "Dispatcher", "kind": "assign", "content": "Assigned: Book venue and send calendar holds"},
+  {"t": 5.29, "type": "message", "sender": "Guardian", "to": "Dispatcher", "kind": "handoff", "content": "Handoff from 'Policy review: spend & vendor rules'"},
+  {"t": 5.79, "type": "task", "task": {"id": "book", "title": "Book venue and send calendar holds", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "awaiting_approval", "agent": "Dispatcher", "output": ""}},
+  {"t": 5.99, "type": "message", "sender": "Orchestrator", "to": "Human", "kind": "approval", "content": "Approval required before: Book venue and send calendar holds"},
+  {"t": 6.78, "type": "message", "sender": "Human", "to": "Orchestrator", "kind": "approve", "content": "Approved (static demo auto-approve)."},
+  {"t": 7.08, "type": "task", "task": {"id": "book", "title": "Book venue and send calendar holds", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "done", "agent": "Dispatcher", "output": "Venue booked for Fri 14th; holds sent to 8 teammates."}},
+  {"t": 7.08, "type": "agent", "agent": {"name": "Dispatcher", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 7.08, "type": "message", "sender": "Dispatcher", "to": "Orchestrator", "kind": "result", "content": "Venue booked for Fri 14th; holds sent to 8 teammates."},
+  {"t": 7.13, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["book"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 7.18, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "busy", "busy_with": "brief"}},
+  {"t": 7.18, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["book"], "requires_approval": false, "status": "running", "agent": "Planner", "output": ""}},
+  {"t": 7.28, "type": "message", "sender": "Orchestrator", "to": "Planner", "kind": "assign", "content": "Assigned: Summarize for the user"},
+  {"t": 7.33, "type": "message", "sender": "Dispatcher", "to": "Planner", "kind": "handoff", "content": "Handoff from 'Book venue and send calendar holds'"},
+  {"t": 7.83, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["book"], "requires_approval": false, "status": "done", "agent": "Planner", "output": "Offsite set: Copper Kettle Loft, Fri 14th, $2,760 total. Holds out to the team."}},
+  {"t": 7.83, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 7.83, "type": "message", "sender": "Planner", "to": "Orchestrator", "kind": "result", "content": "Offsite set: Copper Kettle Loft, Fri 14th, $2,760 total. Holds out to the team."},
+  {"t": 8.13, "type": "run", "state": "done", "summary": {"plan": "done", "venues": "done", "dates": "done", "budget": "done", "review": "done", "book": "done", "brief": "done"}}
+ ]
 }

@@ -1,68 +1,100 @@
 {
-  "scenario": "incident",
-  "roster": [
-    {
-      "name": "Planner",
-      "role": "Breaks the request into a task graph and writes the final brief",
-      "color": "#6366f1"
-    },
-    {
-      "name": "Researcher",
-      "role": "Searches the (fictional) knowledge base and CRM notes",
-      "color": "#0ea5e9"
-    },
-    {
-      "name": "Scheduler",
-      "role": "Finds open slots across participants' calendars",
-      "color": "#14b8a6"
-    },
-    {
-      "name": "Scribe",
-      "role": "Drafts agendas, notes and outbound messages",
-      "color": "#f59e0b"
-    },
-    {
-      "name": "Guardian",
-      "role": "Security & policy review: PII, secrets, external-sharing rules",
-      "color": "#ef4444"
-    },
-    {
-      "name": "Dispatcher",
-      "role": "Performs outbound actions, only after human approval",
-      "color": "#22c55e"
-    },
-    {
-      "name": "Orchestrator",
-      "role": "Routes tasks and messages",
-      "color": "#5eead4"
-    },
-    {
-      "name": "Human",
-      "role": "Approves gated outbound actions",
-      "color": "#e5e9f2"
-    }
-  ],
-  "events": [
-    {
-      "t": 0.0,
-      "type": "request",
-      "title": "Triage a production incident",
-      "text": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it.",
-      "mode": "simulated"
-    },
-    {
-      "t": 0.2,
-      "type": "message",
-      "sender": "Human",
-      "to": "Orchestrator",
-      "kind": "request",
-      "content": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it."
-    },
-    {
-      "t": 0.5,
-      "type": "run",
-      "state": "idle"
-    }
-  ],
-  "note": "Full animated replay ships for kickoff; pick kickoff for the portfolio demo."
+ "scenario": "incident",
+ "title": "Triage a production incident",
+ "synthetic": true,
+ "roster": [
+  {"name": "Planner", "role": "Breaks the request into a task graph and writes the final brief", "color": "#6366f1"},
+  {"name": "Researcher", "role": "Searches the (fictional) knowledge base and CRM notes", "color": "#0ea5e9"},
+  {"name": "Scheduler", "role": "Finds open slots across participants' calendars", "color": "#14b8a6"},
+  {"name": "Scribe", "role": "Drafts agendas, notes and outbound messages", "color": "#f59e0b"},
+  {"name": "Guardian", "role": "Security & policy review: PII, secrets, external-sharing rules", "color": "#ef4444"},
+  {"name": "Dispatcher", "role": "Performs outbound actions, only after human approval", "color": "#22c55e"},
+  {"name": "Orchestrator", "role": "Routes tasks and messages", "color": "#5eead4"},
+  {"name": "Human", "role": "Approves gated outbound actions", "color": "#e5e9f2"}
+ ],
+ "events": [
+  {"t": 0.0, "type": "request", "title": "Triage a production incident", "text": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it.", "mode": "simulated"},
+  {"t": 0.1, "type": "message", "sender": "Human", "to": "Orchestrator", "kind": "request", "content": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it."},
+  {"t": 0.2, "type": "agent", "agent": {"name": "Planner", "role": "Breaks the request into a task graph and writes the final brief", "color": "#6366f1", "status": "idle", "busy_with": null}},
+  {"t": 0.25, "type": "agent", "agent": {"name": "Researcher", "role": "Searches the (fictional) knowledge base and CRM notes", "color": "#0ea5e9", "status": "idle", "busy_with": null}},
+  {"t": 0.3, "type": "agent", "agent": {"name": "Scheduler", "role": "Finds open slots across participants' calendars", "color": "#14b8a6", "status": "idle", "busy_with": null}},
+  {"t": 0.35, "type": "agent", "agent": {"name": "Scribe", "role": "Drafts agendas, notes and outbound messages", "color": "#f59e0b", "status": "idle", "busy_with": null}},
+  {"t": 0.4, "type": "agent", "agent": {"name": "Guardian", "role": "Security & policy review: PII, secrets, external-sharing rules", "color": "#ef4444", "status": "idle", "busy_with": null}},
+  {"t": 0.45, "type": "agent", "agent": {"name": "Dispatcher", "role": "Performs outbound actions, only after human approval", "color": "#22c55e", "status": "idle", "busy_with": null}},
+  {"t": 0.5, "type": "agent", "agent": {"name": "Orchestrator", "role": "Routes tasks and messages", "color": "#5eead4", "status": "idle", "busy_with": null}},
+  {"t": 1.0, "type": "task", "task": {"id": "plan", "title": "Decompose incident triage", "skill": "plan", "deps": [], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 1.15, "type": "task", "task": {"id": "metrics", "title": "Pull checkout latency metrics", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.3, "type": "task", "task": {"id": "deploys", "title": "Check recent deploys", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.45, "type": "task", "task": {"id": "rca", "title": "Draft root-cause note", "skill": "draft", "deps": ["metrics", "deploys"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.5, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "busy", "busy_with": "plan"}},
+  {"t": 1.5, "type": "task", "task": {"id": "plan", "title": "Decompose incident triage", "skill": "plan", "deps": [], "requires_approval": false, "status": "running", "agent": "Planner", "output": ""}},
+  {"t": 1.6, "type": "task", "task": {"id": "status", "title": "Draft public status-page update", "skill": "draft", "deps": ["rca"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.6, "type": "message", "sender": "Orchestrator", "to": "Planner", "kind": "assign", "content": "Assigned: Decompose incident triage"},
+  {"t": 1.75, "type": "task", "task": {"id": "review", "title": "Review public update for leaks", "skill": "review", "deps": ["status"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 1.9, "type": "task", "task": {"id": "publish", "title": "Publish status-page update", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 2.05, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["publish"], "requires_approval": false, "status": "blocked", "agent": null, "output": ""}},
+  {"t": 2.26, "type": "task", "task": {"id": "plan", "title": "Decompose incident triage", "skill": "plan", "deps": [], "requires_approval": false, "status": "done", "agent": "Planner", "output": "Plan: pull fake metrics + deploy log in parallel -> root-cause note -> status update draft -> review -> approval -> publish."}},
+  {"t": 2.26, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 2.26, "type": "message", "sender": "Planner", "to": "Orchestrator", "kind": "result", "content": "Plan: pull fake metrics + deploy log in parallel -> root-cause note -> status update draft -> review -> approval -> publish."},
+  {"t": 2.31, "type": "task", "task": {"id": "metrics", "title": "Pull checkout latency metrics", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 2.31, "type": "task", "task": {"id": "deploys", "title": "Check recent deploys", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 2.36, "type": "agent", "agent": {"name": "Researcher", "role": "", "color": "#888", "status": "busy", "busy_with": "metrics"}},
+  {"t": 2.36, "type": "task", "task": {"id": "metrics", "title": "Pull checkout latency metrics", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "running", "agent": "Researcher", "output": ""}},
+  {"t": 2.36, "type": "agent", "agent": {"name": "Scheduler", "role": "", "color": "#888", "status": "busy", "busy_with": "deploys"}},
+  {"t": 2.36, "type": "task", "task": {"id": "deploys", "title": "Check recent deploys", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "running", "agent": "Scheduler", "output": ""}},
+  {"t": 2.46, "type": "message", "sender": "Orchestrator", "to": "Researcher", "kind": "assign", "content": "Assigned: Pull checkout latency metrics"},
+  {"t": 2.46, "type": "message", "sender": "Orchestrator", "to": "Scheduler", "kind": "assign", "content": "Assigned: Check recent deploys"},
+  {"t": 2.51, "type": "message", "sender": "Planner", "to": "Researcher", "kind": "handoff", "content": "Handoff from 'Decompose incident triage'"},
+  {"t": 2.51, "type": "message", "sender": "Planner", "to": "Scheduler", "kind": "handoff", "content": "Handoff from 'Decompose incident triage'"},
+  {"t": 3.19, "type": "task", "task": {"id": "deploys", "title": "Check recent deploys", "skill": "schedule", "deps": ["plan"], "requires_approval": false, "status": "done", "agent": "Scheduler", "output": "Deploy #4821 (cart-service) at 09:07 raised pool timeout and halved max connections."}},
+  {"t": 3.19, "type": "agent", "agent": {"name": "Scheduler", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 3.19, "type": "message", "sender": "Scheduler", "to": "Orchestrator", "kind": "result", "content": "Deploy #4821 (cart-service) at 09:07 raised pool timeout and halved max connections."},
+  {"t": 3.33, "type": "task", "task": {"id": "metrics", "title": "Pull checkout latency metrics", "skill": "research", "deps": ["plan"], "requires_approval": false, "status": "done", "agent": "Researcher", "output": "p95 checkout latency 310ms -> 2.4s at 09:12; error rate flat; DB connection pool saturated at 100%."}},
+  {"t": 3.33, "type": "agent", "agent": {"name": "Researcher", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 3.33, "type": "message", "sender": "Researcher", "to": "Orchestrator", "kind": "result", "content": "p95 checkout latency 310ms -> 2.4s at 09:12; error rate flat; DB connection pool saturated at 100%."},
+  {"t": 3.38, "type": "task", "task": {"id": "rca", "title": "Draft root-cause note", "skill": "draft", "deps": ["metrics", "deploys"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 3.43, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "busy", "busy_with": "rca"}},
+  {"t": 3.43, "type": "task", "task": {"id": "rca", "title": "Draft root-cause note", "skill": "draft", "deps": ["metrics", "deploys"], "requires_approval": false, "status": "running", "agent": "Scribe", "output": ""}},
+  {"t": 3.53, "type": "message", "sender": "Orchestrator", "to": "Scribe", "kind": "assign", "content": "Assigned: Draft root-cause note"},
+  {"t": 3.58, "type": "message", "sender": "Researcher", "to": "Scribe", "kind": "handoff", "content": "Handoff from 'Pull checkout latency metrics'"},
+  {"t": 3.58, "type": "message", "sender": "Scheduler", "to": "Scribe", "kind": "handoff", "content": "Handoff from 'Check recent deploys'"},
+  {"t": 4.25, "type": "task", "task": {"id": "rca", "title": "Draft root-cause note", "skill": "draft", "deps": ["metrics", "deploys"], "requires_approval": false, "status": "done", "agent": "Scribe", "output": "Likely cause: deploy #4821 halved DB pool size. Mitigation: rollback; latency recovered 09:31 in staging replay."}},
+  {"t": 4.25, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 4.25, "type": "message", "sender": "Scribe", "to": "Orchestrator", "kind": "result", "content": "Likely cause: deploy #4821 halved DB pool size. Mitigation: rollback; latency recovered 09:31 in staging replay."},
+  {"t": 4.3, "type": "task", "task": {"id": "status", "title": "Draft public status-page update", "skill": "draft", "deps": ["rca"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 4.35, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "busy", "busy_with": "status"}},
+  {"t": 4.35, "type": "task", "task": {"id": "status", "title": "Draft public status-page update", "skill": "draft", "deps": ["rca"], "requires_approval": false, "status": "running", "agent": "Scribe", "output": ""}},
+  {"t": 4.45, "type": "message", "sender": "Orchestrator", "to": "Scribe", "kind": "assign", "content": "Assigned: Draft public status-page update"},
+  {"t": 5.36, "type": "task", "task": {"id": "status", "title": "Draft public status-page update", "skill": "draft", "deps": ["rca"], "requires_approval": false, "status": "done", "agent": "Scribe", "output": "We identified elevated checkout latency from 09:12 to 09:31 caused by a configuration change. It has been rolled back. Contact oncall key_9f8e7d6c5b4a for details."}},
+  {"t": 5.36, "type": "agent", "agent": {"name": "Scribe", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 5.36, "type": "message", "sender": "Scribe", "to": "Orchestrator", "kind": "result", "content": "We identified elevated checkout latency from 09:12 to 09:31 caused by a configuration change. It has been rolled back. Contact oncall key_9f8e7d6c5b4a for details."},
+  {"t": 5.41, "type": "task", "task": {"id": "review", "title": "Review public update for leaks", "skill": "review", "deps": ["status"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 5.46, "type": "agent", "agent": {"name": "Guardian", "role": "", "color": "#888", "status": "busy", "busy_with": "review"}},
+  {"t": 5.46, "type": "task", "task": {"id": "review", "title": "Review public update for leaks", "skill": "review", "deps": ["status"], "requires_approval": false, "status": "running", "agent": "Guardian", "output": ""}},
+  {"t": 5.56, "type": "message", "sender": "Orchestrator", "to": "Guardian", "kind": "assign", "content": "Assigned: Review public update for leaks"},
+  {"t": 5.61, "type": "message", "sender": "Scribe", "to": "Guardian", "kind": "handoff", "content": "Handoff from 'Draft public status-page update'"},
+  {"t": 6.35, "type": "task", "task": {"id": "review", "title": "Review public update for leaks", "skill": "review", "deps": ["status"], "requires_approval": false, "status": "done", "agent": "Guardian", "output": "Public copy reviewed: no customer names; tone OK.\nGuardrail scan flagged: api key -> redacted in outbound copy."}},
+  {"t": 6.35, "type": "agent", "agent": {"name": "Guardian", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 6.35, "type": "message", "sender": "Guardian", "to": "Orchestrator", "kind": "result", "content": "Public copy reviewed: no customer names; tone OK.\nGuardrail scan flagged: api key -> redacted in outbound copy."},
+  {"t": 6.4, "type": "task", "task": {"id": "publish", "title": "Publish status-page update", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "queued", "agent": null, "output": ""}},
+  {"t": 6.45, "type": "agent", "agent": {"name": "Dispatcher", "role": "", "color": "#888", "status": "busy", "busy_with": "publish"}},
+  {"t": 6.45, "type": "task", "task": {"id": "publish", "title": "Publish status-page update", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "running", "agent": "Dispatcher", "output": ""}},
+  {"t": 6.55, "type": "message", "sender": "Orchestrator", "to": "Dispatcher", "kind": "assign", "content": "Assigned: Publish status-page update"},
+  {"t": 6.6, "type": "message", "sender": "Guardian", "to": "Dispatcher", "kind": "handoff", "content": "Handoff from 'Review public update for leaks'"},
+  {"t": 7.1, "type": "task", "task": {"id": "publish", "title": "Publish status-page update", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "awaiting_approval", "agent": "Dispatcher", "output": ""}},
+  {"t": 7.3, "type": "message", "sender": "Orchestrator", "to": "Human", "kind": "approval", "content": "Approval required before: Publish status-page update"},
+  {"t": 8.27, "type": "message", "sender": "Human", "to": "Orchestrator", "kind": "approve", "content": "Approved (static demo auto-approve)."},
+  {"t": 8.57, "type": "task", "task": {"id": "publish", "title": "Publish status-page update", "skill": "send", "deps": ["review"], "requires_approval": true, "status": "done", "agent": "Dispatcher", "output": "Status page updated. Contact oncall [REDACTED] for details."}},
+  {"t": 8.57, "type": "agent", "agent": {"name": "Dispatcher", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 8.57, "type": "message", "sender": "Dispatcher", "to": "Orchestrator", "kind": "result", "content": "Status page updated. Contact oncall [REDACTED] for details."},
+  {"t": 8.62, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["publish"], "requires_approval": false, "status": "queued", "agent": null, "output": ""}},
+  {"t": 8.67, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "busy", "busy_with": "brief"}},
+  {"t": 8.67, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["publish"], "requires_approval": false, "status": "running", "agent": "Planner", "output": ""}},
+  {"t": 8.77, "type": "message", "sender": "Orchestrator", "to": "Planner", "kind": "assign", "content": "Assigned: Summarize for the user"},
+  {"t": 8.82, "type": "message", "sender": "Dispatcher", "to": "Planner", "kind": "handoff", "content": "Handoff from 'Publish status-page update'"},
+  {"t": 9.17, "type": "task", "task": {"id": "brief", "title": "Summarize for the user", "skill": "summarize", "deps": ["publish"], "requires_approval": false, "status": "done", "agent": "Planner", "output": "Resolved: rollback of #4821 restored latency. Status page posted after approval; Guardian stripped an internal credential from the public copy."}},
+  {"t": 9.17, "type": "agent", "agent": {"name": "Planner", "role": "", "color": "#888", "status": "idle", "busy_with": null}},
+  {"t": 9.17, "type": "message", "sender": "Planner", "to": "Orchestrator", "kind": "result", "content": "Resolved: rollback of #4821 restored latency. Status page posted after approval; Guardian stripped an internal credential from the public copy."},
+  {"t": 9.47, "type": "run", "state": "done", "summary": {"plan": "done", "metrics": "done", "deploys": "done", "rca": "done", "status": "done", "review": "done", "publish": "done", "brief": "done"}}
+ ]
 }

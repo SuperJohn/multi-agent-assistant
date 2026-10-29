@@ -1,20 +1,30 @@
 {
-  "scenarios": {
-    "kickoff": {
-      "title": "Plan a client kickoff next week",
-      "request": "Plan a kickoff with Lumen & Lark Robotics next week: brief me, pick a time, draft the agenda and send the invite."
-    },
-    "incident": {
-      "title": "Triage a production incident",
-      "request": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it."
-    },
-    "offsite": {
-      "title": "Organize a team offsite",
-      "request": "Organize a one-day offsite for the 8-person platform team next month under $3k."
-    }
+ "scenarios": {
+  "kickoff": {
+   "title": "Plan a client kickoff next week",
+   "request": "Plan a kickoff with Lumen & Lark Robotics next week: brief me, pick a time, draft the agenda and send the invite."
   },
-  "modes": {
-    "simulated": true
+  "incident": {
+   "title": "Triage a production incident",
+   "request": "Checkout latency spiked at 09:12. Figure out what happened, draft a status-page update and post it."
   },
-  "note": "All companies, people and data are fictional."
+  "offsite": {
+   "title": "Organize a team offsite",
+   "request": "Organize a one-day offsite for the 8-person platform team next month under $3k."
+  },
+  "vendor": {
+   "title": "Review a vendor contract renewal",
+   "request": "Our Brightpath Analytics contract auto-renews on the 30th. Compare usage against the price, draft a negotiation email to their account manager and send it.",
+   "demo_only": true
+  },
+  "hiring": {
+   "title": "Run an interview loop",
+   "request": "Set up the onsite loop for the senior data engineer candidate next week: pull the scorecard, book four interviewers, draft the candidate packet and send the invites.",
+   "demo_only": true
+  }
+ },
+ "modes": {
+  "simulated": true
+ },
+ "note": "All companies, people and data are fictional."
 }
